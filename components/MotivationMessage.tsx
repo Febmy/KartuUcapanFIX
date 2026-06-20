@@ -73,7 +73,7 @@ export function MotivationMessage({
         {[...Array(6)].map((_, i) => (
           <motion.div
             key={i}
-            className="absolute text-accent opacity-30 text-5xl sm:text-6xl"
+            className="absolute text-accent opacity-30 text-6xl"
             animate={{
               y: [0, -200],
               x: [0, Math.sin(i) * 80],
@@ -101,14 +101,14 @@ export function MotivationMessage({
         transition={{ delay: 0.3, duration: 0.6 }}
         className="max-w-2xl w-full relative z-10"
       >
-        <div className="bg-card rounded-2xl shadow-2xl p-6 sm:p-12 border-2 border-primary space-y-6">
+        <div className="bg-card rounded-2xl shadow-2xl p-12 border-2 border-primary space-y-6">
           <motion.div
             initial={{ opacity: 0, y: -10 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.5 }}
             className="text-center space-y-3"
           >
-            <h2 className="text-3xl sm:text-4xl font-bold text-primary">
+            <h2 className="text-4xl font-bold text-primary">
               Tunggu, {recipientName}!
             </h2>
             <p className="text-lg text-card-foreground font-medium">Aku punya satu hal lagi untuk kamu...</p>
@@ -127,7 +127,7 @@ export function MotivationMessage({
             transition={{ delay: 0.9 }}
             className="space-y-4"
           >
-            <p className="text-lg sm:text-xl text-card-foreground leading-relaxed whitespace-pre-wrap font-medium">
+            <p className="text-xl text-card-foreground leading-relaxed whitespace-pre-wrap font-medium">
               {motivationMessage}
             </p>
           </motion.div>
@@ -136,7 +136,7 @@ export function MotivationMessage({
             initial={{ opacity: 0, y: 10 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 1.05 }}
-            className="rounded-2xl border-2 border-primary/20 bg-rose-50 p-4 sm:p-5"
+            className="rounded-2xl border-2 border-primary/20 bg-rose-50 p-5"
           >
             <p className="mb-3 text-center text-sm font-bold text-primary">
               Kartu kecil buat kamu
@@ -159,7 +159,7 @@ export function MotivationMessage({
               aria-label="Gosok kartu untuk membuka pesan"
             >
               <div className="flex min-h-24 items-center justify-center">
-                <p className="text-base font-semibold leading-relaxed text-foreground sm:text-lg">
+                <p className="text-lg font-semibold leading-relaxed text-foreground">
                   Kamu boleh bangga sama dirimu sendiri hari ini. Aku juga bangga, sungguh.
                 </p>
               </div>
@@ -171,7 +171,7 @@ export function MotivationMessage({
                 >
                   <div>
                     <Sparkles className="mx-auto mb-2 h-7 w-7" />
-                    <p className="text-sm font-bold sm:text-base">Gosok / tekan untuk buka pesan</p>
+                    <p className="text-base font-bold">Gosok / tekan untuk buka pesan</p>
                     <div className="mt-3 h-2 w-44 max-w-full overflow-hidden rounded-full bg-white/25">
                       <div
                         className="h-full rounded-full bg-white transition-all"
@@ -202,7 +202,7 @@ export function MotivationMessage({
             <button
               type="button"
               onClick={showNextCompliment}
-              className="mt-4 inline-flex w-full items-center justify-center gap-2 rounded-xl bg-primary px-4 py-3 text-sm font-bold text-white transition hover:bg-primary-dark sm:w-auto"
+              className="mt-4 inline-flex items-center justify-center gap-2 rounded-xl bg-primary px-4 py-3 text-sm font-bold text-white transition hover:bg-primary-dark"
             >
               <RefreshCw className="h-4 w-4" />
               Kasih semangat lagi
@@ -239,7 +239,7 @@ export function MotivationMessage({
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             transition={{ delay: 1.35 }}
-            className="bg-gradient-to-r from-primary-light to-accent-light bg-opacity-20 rounded-xl p-4 sm:p-6"
+            className="bg-gradient-to-r from-primary-light to-accent-light bg-opacity-20 rounded-xl p-6"
           >
             <p className="text-center text-foreground font-semibold flex items-center justify-center gap-2">
               <Heart className="w-5 h-5 text-primary" />

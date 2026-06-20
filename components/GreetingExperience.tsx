@@ -106,8 +106,8 @@ export function GreetingExperience() {
             onPause={() => setIsMusicPlaying(false)}
           />
           {stage !== 'name' && (
-            <div className="fixed bottom-4 left-4 right-4 z-50 flex justify-center sm:left-auto sm:right-5">
-              <div className="flex max-w-[calc(100vw-2rem)] items-center gap-3 rounded-xl border border-primary/30 bg-card/95 px-4 py-3 text-card-foreground shadow-xl backdrop-blur sm:max-w-sm">
+            <div className="fixed bottom-4 right-5 z-50">
+              <div className="flex max-w-sm items-center gap-3 rounded-xl border border-primary/30 bg-card/95 px-4 py-3 text-card-foreground shadow-xl backdrop-blur">
                 <Music className="h-5 w-5 shrink-0 text-primary" />
                 <div className="min-w-0 flex-1">
                   <p className="truncate text-xs font-semibold">{data.musicTitle || 'Musik Latar'}</p>

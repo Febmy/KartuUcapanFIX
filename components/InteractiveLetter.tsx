@@ -131,7 +131,7 @@ export function InteractiveLetter({
               initial={{ opacity: 0, y: -30 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.8 }}
-              className="text-4xl sm:text-5xl font-bold text-foreground mb-3"
+              className="text-5xl font-bold text-foreground mb-3"
             >
               Hai <span className="text-foreground">{recipientName}!</span>
             </motion.h1>
@@ -142,10 +142,10 @@ export function InteractiveLetter({
               transition={{ duration: 0.8, delay: 0.2 }}
               className="mb-6"
             >
-              <p className="text-xl sm:text-2xl font-semibold text-foreground mb-2">
+              <p className="text-2xl font-semibold text-foreground mb-2">
                 🎓 Selamat sudah menyelesaikan sidang skripsi!
               </p>
-              <p className="text-base sm:text-lg text-foreground">
+              <p className="text-lg text-foreground">
                 Sebelum suratnya dibuka, pilih mood kamu dulu.
               </p>
             </motion.div>
@@ -154,7 +154,7 @@ export function InteractiveLetter({
               initial={{ opacity: 0, scale: 0.95 }}
               animate={{ opacity: 1, scale: 1 }}
               transition={{ duration: 0.6, delay: 0.3 }}
-              className="mb-8 rounded-2xl border-2 border-accent bg-white p-4 sm:p-6 shadow-lg"
+              className="mb-8 rounded-2xl border-2 border-accent bg-white p-6 shadow-lg"
             >
               <div className="grid grid-cols-2 gap-3">
                 {moodOptions.map((mood) => (
@@ -162,7 +162,7 @@ export function InteractiveLetter({
                     key={mood.id}
                     type="button"
                     onClick={() => setSelectedMood(mood)}
-                    className={`rounded-xl border-2 px-3 py-3 text-sm font-semibold transition sm:text-base ${
+                    className={`rounded-xl border-2 px-3 py-3 text-base font-semibold transition ${
                       selectedMood.id === mood.id
                         ? 'border-primary bg-primary text-white shadow-md'
                         : 'border-accent bg-background text-foreground hover:border-primary'
@@ -176,7 +176,7 @@ export function InteractiveLetter({
                 key={selectedMood.id}
                 initial={{ opacity: 0, y: 8 }}
                 animate={{ opacity: 1, y: 0 }}
-                className="mt-4 rounded-xl bg-rose-50 px-4 py-3 text-sm font-medium leading-relaxed text-foreground sm:text-base"
+                className="mt-4 rounded-xl bg-rose-50 px-4 py-3 text-base font-medium leading-relaxed text-foreground"
               >
                 {selectedMood.response}
               </motion.p>
@@ -233,7 +233,7 @@ export function InteractiveLetter({
             <motion.h2
               initial={{ opacity: 0, y: -20 }}
               animate={{ opacity: 1, y: 0 }}
-              className="text-3xl sm:text-4xl font-bold text-center text-foreground mb-2"
+              className="text-4xl font-bold text-center text-foreground mb-2"
             >
               Pilih simbolmu 🎨
             </motion.h2>
@@ -246,7 +246,7 @@ export function InteractiveLetter({
               Setiap pilihan membawa makna istimewa untukmu.
             </motion.p>
 
-            <div className="grid grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-6 mb-8">
+            <div className="grid grid-cols-4 gap-6 mb-8">
               {funOptions.map((option, index) => (
                 <motion.button
                   key={option.id}
@@ -254,7 +254,7 @@ export function InteractiveLetter({
                   animate={{ opacity: 1, scale: 1 }}
                   transition={{ delay: index * 0.1 }}
                   onClick={() => handleSelectOption(option.id)}
-                  className={`group relative p-4 sm:p-6 rounded-2xl transition-all duration-300 ${
+                  className={`group relative p-6 rounded-2xl transition-all duration-300 ${
                     selectedOption === option.id
                       ? 'bg-primary scale-105 shadow-2xl'
                       : 'bg-white border-2 border-accent hover:border-primary hover:scale-105'
@@ -310,7 +310,7 @@ export function InteractiveLetter({
           initial={{ opacity: 0, y: 50 }}
           animate={{ opacity: 1, y: 0 }}
           exit={{ opacity: 0, y: -50 }}
-          className="min-h-screen bg-gradient-to-br from-rose-50 via-pink-50 to-red-50 p-4 sm:p-6"
+          className="min-h-screen bg-gradient-to-br from-rose-50 via-pink-50 to-red-50 p-6"
         >
           <div className="max-w-3xl mx-auto">
             <motion.button
@@ -330,7 +330,7 @@ export function InteractiveLetter({
               transition={{ duration: 0.6 }}
               className="bg-white rounded-3xl shadow-2xl overflow-hidden border-2 border-accent"
             >
-              <div className="bg-gradient-to-r from-primary to-primary-dark p-6 sm:p-10 text-white">
+              <div className="bg-gradient-to-r from-primary to-primary-dark p-10 text-white">
                 <motion.div
                   animate={{ rotate: [0, -5, 5, 0] }}
                   transition={{ repeat: Infinity, duration: 2 }}
@@ -338,22 +338,22 @@ export function InteractiveLetter({
                 >
                   💌
                 </motion.div>
-                <h2 className="text-3xl sm:text-4xl font-bold mb-2">
+                <h2 className="text-4xl font-bold mb-2">
                   {recipientName}
                 </h2>
-                <p className="text-white text-base sm:text-lg font-semibold">
+                <p className="text-white text-lg font-semibold">
                   Seorang lulusan yang membanggakan semua yang mencintaimu.
                 </p>
               </div>
 
-              <div className="p-6 sm:p-10">
+              <div className="p-10">
                 <motion.div
                   initial={{ opacity: 0 }}
                   animate={{ opacity: 1 }}
                   transition={{ delay: 0.2 }}
                   className="mb-8"
                 >
-                  <h3 className="text-2xl sm:text-3xl font-bold text-center text-primary mb-2">
+                  <h3 className="text-3xl font-bold text-center text-primary mb-2">
                     Selamat Sudah Menyelesaikan Sidang Skripsi! 🎓
                   </h3>
                   <p className="text-center text-foreground italic">
@@ -367,8 +367,8 @@ export function InteractiveLetter({
                   transition={{ delay: 0.3 }}
                   className="mb-8"
                 >
-                  <div className="bg-rose-50 rounded-2xl p-5 sm:p-6 border-l-4 border-primary">
-                    <p className="text-foreground leading-relaxed text-base sm:text-lg whitespace-pre-wrap">
+                  <div className="bg-rose-50 rounded-2xl p-6 border-l-4 border-primary">
+                    <p className="text-foreground leading-relaxed text-lg whitespace-pre-wrap">
                       {message}
                     </p>
                   </div>
@@ -378,7 +378,7 @@ export function InteractiveLetter({
                   initial={{ opacity: 0 }}
                   animate={{ opacity: 1 }}
                   transition={{ delay: 0.4 }}
-                  className="grid grid-cols-1 sm:grid-cols-2 gap-4 mb-8"
+                  className="grid grid-cols-2 gap-4 mb-8"
                 >
                   <div className="bg-accent-light rounded-xl p-4 text-center">
                     <p className="text-xs text-primary mb-1 font-bold uppercase tracking-wide">
@@ -435,7 +435,7 @@ export function InteractiveLetter({
                 >
                   <button
                     onClick={onThankYou}
-                    className="inline-flex w-full items-center justify-center gap-2 rounded-xl bg-primary px-6 py-3 font-semibold text-white shadow-lg transition hover:bg-primary-dark sm:w-auto"
+                    className="inline-flex items-center justify-center gap-2 rounded-xl bg-primary px-6 py-3 font-semibold text-white shadow-lg transition hover:bg-primary-dark"
                   >
                     <Heart className="h-5 w-5" />
                     Lanjut ke pesan terakhir

@@ -64,7 +64,7 @@ export function CelebrationMessage({
         {[...Array(10)].map((_, i) => (
           <motion.div
             key={i}
-            className="absolute text-primary opacity-30 text-6xl sm:text-7xl"
+            className="absolute text-primary opacity-30 text-7xl"
             animate={{
               y: [-50, -400],
               x: [0, Math.sin(i) * 150],
@@ -93,35 +93,35 @@ export function CelebrationMessage({
         animate="visible"
         className="max-w-2xl w-full relative z-10"
       >
-        <div className="text-center space-y-6 sm:space-y-8">
+        <div className="text-center space-y-8">
           <motion.div
             variants={itemVariants}
             animate={{ scale: [1, 1.1, 1] }}
             transition={{ duration: 0.8, repeat: Infinity }}
-            className="text-7xl sm:text-8xl"
+            className="text-8xl"
           >
             🎉
           </motion.div>
 
           <motion.div variants={itemVariants} className="space-y-3">
-            <h1 className="text-4xl sm:text-5xl font-bold text-foreground">
+            <h1 className="text-5xl font-bold text-foreground">
               Cieeee!
             </h1>
-            <p className="text-2xl sm:text-3xl text-primary font-semibold">
+            <p className="text-3xl text-primary font-semibold">
               {recipientName}
             </p>
-            <p className="text-2xl sm:text-3xl text-foreground font-bold">
+            <p className="text-3xl text-foreground font-bold">
               sudah sidang skripsi!
             </p>
           </motion.div>
 
-          <motion.p variants={itemVariants} className="text-lg sm:text-xl text-foreground leading-relaxed">
+          <motion.p variants={itemVariants} className="text-xl text-foreground leading-relaxed">
             {celebrationMessage}
           </motion.p>
 
           <motion.div
             variants={itemVariants}
-            className="flex justify-center gap-3 sm:gap-4 text-4xl sm:text-5xl"
+            className="flex justify-center gap-4 text-5xl"
           >
             <motion.span
               animate={{ rotate: [0, 360], scale: [1, 1.2, 1] }}
@@ -148,7 +148,7 @@ export function CelebrationMessage({
             whileHover={{ scale: 1.05 }}
             whileTap={{ scale: 0.95 }}
             onClick={onContinue}
-            className="inline-block bg-gradient-to-r from-primary to-primary-dark text-white font-bold py-4 px-8 sm:px-12 rounded-xl hover:shadow-xl transition-all text-lg sm:text-xl mt-4"
+            className="inline-block bg-gradient-to-r from-primary to-primary-dark text-white font-bold py-4 px-12 rounded-xl hover:shadow-xl transition-all text-xl mt-4"
           >
             Lanjut ke Ucapan Istimewa →
           </motion.button>

@@ -58,7 +58,7 @@ export function NameInput({ onContinue, defaultName }: NameInputProps) {
         transition={{ delay: 0.2 }}
         className="max-w-md w-full relative z-10"
       >
-        <div className="bg-white rounded-2xl shadow-2xl p-8 border-2 border-primary border-opacity-20">
+        <div className="bg-white rounded-2xl shadow-2xl p-12 border-2 border-primary border-opacity-20">
           <motion.div
             animate={{ rotate: [0, 5, -5, 0] }}
             transition={{ duration: 3, repeat: Infinity }}
@@ -67,7 +67,7 @@ export function NameInput({ onContinue, defaultName }: NameInputProps) {
             <span className="text-5xl">🌹</span>
           </motion.div>
 
-          <h1 className="text-3xl sm:text-4xl font-bold text-center text-foreground mb-2">
+          <h1 className="text-4xl font-bold text-center text-foreground mb-2">
             Halo!
           </h1>
 

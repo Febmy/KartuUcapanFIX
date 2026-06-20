@@ -72,12 +72,12 @@ export function ReadyConfirmation({
         transition={{ delay: 0.2 }}
         className="max-w-lg w-full relative z-10"
       >
-        <div className="bg-white rounded-2xl shadow-2xl p-8 sm:p-12 border-2 border-primary border-opacity-20">
+        <div className="bg-white rounded-2xl shadow-2xl p-12 border-2 border-primary border-opacity-20">
           <motion.h2
             initial={{ opacity: 0, y: -20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.3 }}
-            className="text-3xl sm:text-4xl font-bold text-center text-foreground mb-2"
+            className="text-4xl font-bold text-center text-foreground mb-2"
           >
             Hai, {recipientName}!
           </motion.h2>
@@ -86,7 +86,7 @@ export function ReadyConfirmation({
             initial={{ opacity: 0, y: -10 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.4 }}
-            className="text-xl sm:text-2xl text-center text-foreground mb-8"
+            className="text-2xl text-center text-foreground mb-8"
           >
             {readyMessage}
           </motion.p>
@@ -99,13 +99,13 @@ export function ReadyConfirmation({
             <span className="text-6xl">💌</span>
           </motion.div>
 
-          <div className="flex flex-col sm:flex-row gap-4 relative min-h-12">
+          <div className="flex flex-row gap-4 relative min-h-12">
             <motion.button
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
               transition={{ delay: 0.5 }}
               onClick={onContinue}
-              className="flex-1 bg-gradient-to-r from-primary to-primary-dark text-white font-bold py-3 px-6 rounded-xl hover:shadow-lg transition-all flex items-center justify-center gap-2 text-sm sm:text-base"
+              className="flex-1 bg-gradient-to-r from-primary to-primary-dark text-white font-bold py-3 px-6 rounded-xl hover:shadow-lg transition-all flex items-center justify-center gap-2 text-base"
             >
               <Heart className="w-5 h-5" />
               Sudah Siap!
@@ -115,7 +115,7 @@ export function ReadyConfirmation({
               animate={notReadyClicks > 0 ? notReadyPosition : { x: 0, y: 0 }}
               onMouseEnter={moveNotReadyButton}
               onClick={handleNotReadyClick}
-              className="flex-1 sm:absolute sm:top-0 sm:right-0 sm:w-24 bg-accent hover:bg-accent-light text-foreground font-bold py-3 px-6 rounded-xl transition-all flex items-center justify-center text-sm sm:text-base border-2 border-foreground border-opacity-20"
+              className="absolute top-0 right-0 w-24 bg-accent hover:bg-accent-light text-foreground font-bold py-3 px-6 rounded-xl transition-all flex items-center justify-center text-base border-2 border-foreground border-opacity-20"
             >
               Belum
             </motion.button>
@@ -125,7 +125,7 @@ export function ReadyConfirmation({
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             transition={{ delay: 0.6 }}
-            className="text-xs sm:text-sm text-muted-foreground text-center mt-8"
+            className="text-sm text-muted-foreground text-center mt-8"
           >
             {notReadyClicks > 0 && notReadyClicks < 5
               ? `Hehe, tombol ini bisa lari loh! 😄 (${5 - notReadyClicks - 1} lagi dipaksa siap)`
