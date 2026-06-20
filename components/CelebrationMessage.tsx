@@ -60,7 +60,6 @@ export function CelebrationMessage({
       exit={{ opacity: 0 }}
       className="min-h-screen bg-gradient-to-br from-background via-primary-light via-opacity-20 to-accent-light flex items-center justify-center px-4 py-8"
     >
-      {/* Decorative petals */}
       <div className="absolute inset-0 overflow-hidden pointer-events-none">
         {[...Array(10)].map((_, i) => (
           <motion.div
@@ -95,7 +94,6 @@ export function CelebrationMessage({
         className="max-w-2xl w-full relative z-10"
       >
         <div className="text-center space-y-6 sm:space-y-8">
-          {/* Celebration emoji */}
           <motion.div
             variants={itemVariants}
             animate={{ scale: [1, 1.1, 1] }}
@@ -105,7 +103,6 @@ export function CelebrationMessage({
             🎉
           </motion.div>
 
-          {/* Main message */}
           <motion.div variants={itemVariants} className="space-y-3">
             <h1 className="text-4xl sm:text-5xl font-bold text-foreground">
               Cieeee!
@@ -118,12 +115,10 @@ export function CelebrationMessage({
             </p>
           </motion.div>
 
-          {/* Celebration message */}
           <motion.p variants={itemVariants} className="text-lg sm:text-xl text-foreground leading-relaxed">
             {celebrationMessage}
           </motion.p>
 
-          {/* Decorative stars */}
           <motion.div
             variants={itemVariants}
             className="flex justify-center gap-3 sm:gap-4 text-4xl sm:text-5xl"
@@ -148,7 +143,6 @@ export function CelebrationMessage({
             </motion.span>
           </motion.div>
 
-          {/* Continue button */}
           <motion.button
             variants={itemVariants}
             whileHover={{ scale: 1.05 }}

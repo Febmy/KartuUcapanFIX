@@ -1,6 +1,6 @@
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import { motion } from 'framer-motion';
-import { Heart } from 'lucide-react';
+import { Heart, RefreshCw, Sparkles } from 'lucide-react';
 import confetti from 'canvas-confetti';
 
 interface MotivationMessageProps {
@@ -8,10 +8,23 @@ interface MotivationMessageProps {
   motivationMessage: string;
 }
 
+const compliments = [
+  'Revisi itu cuma boss terakhir. Kamu sudah punya semua bekal buat menang.',
+  'Hari ini bukti kalau kamu lebih kuat dari rasa capekmu.',
+  'Pelan-pelan saja. Satu halaman, satu napas, satu langkah lagi.',
+  'Kamu tidak harus sempurna untuk tetap membanggakan.',
+  'Kalau hari ini terasa berat, ingat: kamu sudah melewati yang kemarin.',
+];
+
 export function MotivationMessage({
   recipientName,
   motivationMessage,
 }: MotivationMessageProps) {
+  const [complimentIndex, setComplimentIndex] = useState(0);
+  const [scratchProgress, setScratchProgress] = useState(0);
+  const [isScratching, setIsScratching] = useState(false);
+  const isScratchRevealed = scratchProgress >= 100;
+
   useEffect(() => {
     const timer = window.setTimeout(() => {
       confetti({
@@ -25,6 +38,30 @@ export function MotivationMessage({
     return () => window.clearTimeout(timer);
   }, []);
 
+  useEffect(() => {
+    if (!isScratchRevealed) return;
+
+    confetti({
+      particleCount: 55,
+      spread: 60,
+      origin: { y: 0.7 },
+      colors: ['#c1666b', '#d89a9f', '#e8d4d4'],
+    });
+  }, [isScratchRevealed]);
+
+  const addScratchProgress = () => {
+    setScratchProgress((progress) => Math.min(100, progress + 14));
+  };
+
+  const handlePointerMove = () => {
+    if (!isScratching || isScratchRevealed) return;
+    addScratchProgress();
+  };
+
+  const showNextCompliment = () => {
+    setComplimentIndex((index) => (index + 1) % compliments.length);
+  };
+
   return (
     <motion.div
       initial={{ opacity: 0 }}
@@ -32,7 +69,6 @@ export function MotivationMessage({
       transition={{ duration: 0.8 }}
       className="min-h-screen bg-gradient-to-br from-primary-dark via-foreground to-primary-dark flex items-center justify-center px-4 py-8"
     >
-      {/* Decorative petals */}
       <div className="absolute inset-0 overflow-hidden pointer-events-none">
         {[...Array(6)].map((_, i) => (
           <motion.div
@@ -65,8 +101,7 @@ export function MotivationMessage({
         transition={{ delay: 0.3, duration: 0.6 }}
         className="max-w-2xl w-full relative z-10"
       >
-        <div className="bg-card rounded-2xl shadow-2xl p-8 sm:p-12 border-2 border-primary space-y-6">
-          {/* Header */}
+        <div className="bg-card rounded-2xl shadow-2xl p-6 sm:p-12 border-2 border-primary space-y-6">
           <motion.div
             initial={{ opacity: 0, y: -10 }}
             animate={{ opacity: 1, y: 0 }}
@@ -79,7 +114,6 @@ export function MotivationMessage({
             <p className="text-lg text-card-foreground font-medium">Aku punya satu hal lagi untuk kamu...</p>
           </motion.div>
 
-          {/* Decorative line */}
           <motion.div
             initial={{ scaleX: 0 }}
             animate={{ scaleX: 1 }}
@@ -87,7 +121,6 @@ export function MotivationMessage({
             className="h-1 bg-gradient-to-r from-primary via-primary-light to-primary rounded-full origin-left"
           />
 
-          {/* Main message */}
           <motion.div
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
@@ -99,11 +132,87 @@ export function MotivationMessage({
             </p>
           </motion.div>
 
-          {/* Decorative elements */}
+          <motion.div
+            initial={{ opacity: 0, y: 10 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ delay: 1.05 }}
+            className="rounded-2xl border-2 border-primary/20 bg-rose-50 p-4 sm:p-5"
+          >
+            <p className="mb-3 text-center text-sm font-bold text-primary">
+              Kartu kecil buat kamu
+            </p>
+            <div
+              role="button"
+              tabIndex={0}
+              onPointerDown={(event) => {
+                event.currentTarget.setPointerCapture(event.pointerId);
+                setIsScratching(true);
+                addScratchProgress();
+              }}
+              onPointerMove={handlePointerMove}
+              onPointerUp={() => setIsScratching(false)}
+              onPointerCancel={() => setIsScratching(false)}
+              onKeyDown={(event) => {
+                if (event.key === 'Enter' || event.key === ' ') addScratchProgress();
+              }}
+              className="relative min-h-36 select-none overflow-hidden rounded-xl border-2 border-dashed border-primary/30 bg-white p-5 text-center outline-none touch-none"
+              aria-label="Gosok kartu untuk membuka pesan"
+            >
+              <div className="flex min-h-24 items-center justify-center">
+                <p className="text-base font-semibold leading-relaxed text-foreground sm:text-lg">
+                  Kamu boleh bangga sama dirimu sendiri hari ini. Aku juga bangga, sungguh.
+                </p>
+              </div>
+
+              {!isScratchRevealed && (
+                <motion.div
+                  animate={{ opacity: Math.max(0.15, 1 - scratchProgress / 100) }}
+                  className="absolute inset-0 grid place-items-center bg-gradient-to-br from-primary via-primary-dark to-foreground px-5 text-white"
+                >
+                  <div>
+                    <Sparkles className="mx-auto mb-2 h-7 w-7" />
+                    <p className="text-sm font-bold sm:text-base">Gosok / tekan untuk buka pesan</p>
+                    <div className="mt-3 h-2 w-44 max-w-full overflow-hidden rounded-full bg-white/25">
+                      <div
+                        className="h-full rounded-full bg-white transition-all"
+                        style={{ width: `${scratchProgress}%` }}
+                      />
+                    </div>
+                  </div>
+                </motion.div>
+              )}
+            </div>
+          </motion.div>
+
+          <motion.div
+            initial={{ opacity: 0, y: 10 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ delay: 1.15 }}
+            className="rounded-2xl border border-accent bg-background p-4 text-center"
+          >
+            <p className="mb-3 text-sm font-semibold text-primary">Butuh semangat lagi?</p>
+            <motion.p
+              key={complimentIndex}
+              initial={{ opacity: 0, y: 8 }}
+              animate={{ opacity: 1, y: 0 }}
+              className="min-h-14 text-base font-medium leading-relaxed text-foreground"
+            >
+              {compliments[complimentIndex]}
+            </motion.p>
+            <button
+              type="button"
+              onClick={showNextCompliment}
+              className="mt-4 inline-flex w-full items-center justify-center gap-2 rounded-xl bg-primary px-4 py-3 text-sm font-bold text-white transition hover:bg-primary-dark sm:w-auto"
+            >
+              <RefreshCw className="h-4 w-4" />
+              Kasih semangat lagi
+            </button>
+          </motion.div>
+
           <motion.div
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
-            transition={{ delay: 1.1 }}
+            transition={{ delay: 1.25 }}
             className="flex justify-center gap-4 text-4xl"
           >
             <motion.span
@@ -126,25 +235,23 @@ export function MotivationMessage({
             </motion.span>
           </motion.div>
 
-          {/* Footer message */}
           <motion.div
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
-            transition={{ delay: 1.2 }}
+            transition={{ delay: 1.35 }}
             className="bg-gradient-to-r from-primary-light to-accent-light bg-opacity-20 rounded-xl p-4 sm:p-6"
           >
             <p className="text-center text-foreground font-semibold flex items-center justify-center gap-2">
               <Heart className="w-5 h-5 text-primary" />
-              aku percaya pada sama kamu!
+              aku percaya sama kamu!
               <Heart className="w-5 h-5 text-primary" />
             </p>
           </motion.div>
 
-          {/* Final CTA */}
           <motion.div
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
-            transition={{ delay: 1.4 }}
+            transition={{ delay: 1.45 }}
             className="text-center"
           >
             <p className="text-sm text-foreground font-medium mb-4">

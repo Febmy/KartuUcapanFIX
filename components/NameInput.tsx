@@ -27,7 +27,6 @@ export function NameInput({ onContinue, defaultName }: NameInputProps) {
       exit={{ opacity: 0 }}
       className="min-h-screen bg-gradient-to-br from-background via-accent-light to-background flex items-center justify-center px-4 py-8"
     >
-      {/* Decorative petals */}
       <div className="absolute inset-0 overflow-hidden pointer-events-none">
         {[...Array(5)].map((_, i) => (
           <motion.div
@@ -60,7 +59,6 @@ export function NameInput({ onContinue, defaultName }: NameInputProps) {
         className="max-w-md w-full relative z-10"
       >
         <div className="bg-white rounded-2xl shadow-2xl p-8 border-2 border-primary border-opacity-20">
-          {/* Decorative rose at top */}
           <motion.div
             animate={{ rotate: [0, 5, -5, 0] }}
             transition={{ duration: 3, repeat: Infinity }}

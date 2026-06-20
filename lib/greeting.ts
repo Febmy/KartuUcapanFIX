@@ -43,15 +43,15 @@ export interface GreetingDbRow {
 
 export const DEFAULT_GREETING: GreetingRecord = {
   recipientName: 'Ayisha Salsabila',
-  university: 'Nama kampus kamu apa sih? ',
-  major: 'Wah jurusannya apa?',
+  university: 'Perjalanan akademik yang kamu perjuangkan',
+  major: 'Skripsi yang akhirnya berhasil kamu lewati',
   readyMessage: 'Sudah siap menerima kejutan kecil untuk sidang skripsimu?',
-  celebrationMessage: 'Selamat sidang skripsi! Kamu berhasil sampai di hari yang sudah lama diperjuangkan Cantik!!!. 🎓',
+  celebrationMessage: 'Selamat sidang skripsi! Kamu berhasil sampai di hari yang sudah lama kamu perjuangkan, cantik! 🎓',
   letterMessage:
-    'Ayisha, hari ini bukan cuma tentang kamu berhasil melewati sidang skripsi. Hari ini adalah bukti bahwa kamu mampu bertahan di hari-hari yang melelahkan, penuh revisi, ragu, kurang tidur, dan tekanan yang tidak semua orang tahu.\n\nAku tahu perjalananmu sampai di titik ini tidak mudah. Karena itu, aku benar-benar bangga melihat kamu berhasil menyelesaikannya. Bukan hanya karena akhirnya kamu sidang, tetapi karena kamu tidak menyerah ketika semuanya terasa berat.\n\nMungkin sekarang kita sudah berjalan di jalan masing-masing. Tetapi ada satu hal yang tidak berubah: aku tetap percaya kamu adalah seseorang yang kuat, hebat, dan mampu melakukan banyak hal besar dalam hidupmu.\n\nSelamat sidang skripsi, Aysiah. Terima kasih karena sudah bertahan sejauh ini. Aku tulus mendoakan yang terbaik untukmu.',
+    'Ayisha, hari ini bukan cuma tentang kamu berhasil melewati sidang skripsi. Hari ini adalah bukti bahwa kamu mampu bertahan di hari-hari yang melelahkan, penuh revisi, ragu, kurang tidur, dan tekanan yang tidak semua orang tahu.\n\nAku tahu perjalananmu sampai di titik ini tidak mudah. Karena itu, aku benar-benar bangga melihat kamu berhasil menyelesaikannya. Bukan hanya karena akhirnya kamu sidang, tetapi karena kamu tidak menyerah ketika semuanya terasa berat.\n\nMungkin sekarang kita sudah berjalan di jalan masing-masing. Tetapi ada satu hal yang tidak berubah: aku tetap percaya kamu adalah seseorang yang kuat, hebat, dan mampu melakukan banyak hal besar dalam hidupmu.\n\nSelamat sidang skripsi, Ayisha. Terima kasih karena sudah bertahan sejauh ini. Aku tulus mendoakan yang terbaik untukmu.',
   senderName: 'Siapa yaaaa',
   motivationMessage:
-    'Dan setelah hari ini, mungkin masih ada revisi yang menunggu untuk diselesaikan. Tapi jangan melihatnya sebagai beban yang menghapus pencapaianmu hari ini. Revisi hanyalah satu langkah terakhir dari perjalanan panjang yang sudah berhasil kamu lewati dengan luar biasa.\n\nPelan-pelan saja, satu per satu. Aku percaya kamu pasti bisa menyelesaikannya dengan baik. Semangat revisinya, Aysiah. Sedikit lagi, dan semua perjuanganmu akan benar-benar sampai pada garis akhirnya. 💪✨',
+    'Dan setelah hari ini, mungkin masih ada revisi yang menunggu untuk diselesaikan. Tapi jangan melihatnya sebagai beban yang menghapus pencapaianmu hari ini. Revisi hanyalah satu langkah terakhir dari perjalanan panjang yang sudah berhasil kamu lewati dengan luar biasa.\n\nPelan-pelan saja, satu per satu. Aku percaya kamu pasti bisa menyelesaikannya dengan baik. Semangat revisinya, Ayisha. Sedikit lagi, dan semua perjuanganmu akan benar-benar sampai pada garis akhirnya. 💪✨',
   imageUrl: 'https://images.unsplash.com/photo-1608889467537-0f02349e612e?w=1200&h=900&fit=crop',
   musicUrl: '',
   musicTitle: '',
@@ -117,7 +117,7 @@ export function greetingToDb(data: GreetingData & Partial<Pick<GreetingRecord, '
 }
 
 export function getGreetingSlug() {
-  return process.env.GREETING_SLUG?.trim() || 'aysiah-sidang';
+  return process.env.GREETING_SLUG?.trim() || 'ayisha-sidang';
 }
 
 function asString(value: unknown, maxLength: number) {

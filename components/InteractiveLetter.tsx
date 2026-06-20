@@ -1,8 +1,8 @@
 'use client';
 
 import { useState } from 'react';
-import { motion, AnimatePresence } from 'framer-motion';
-import { Sparkles, Gift, Heart, Star } from 'lucide-react';
+import { AnimatePresence, motion } from 'framer-motion';
+import { ArrowLeft, Heart, Sparkles } from 'lucide-react';
 
 interface InteractiveLetterProps {
   recipientName: string;
@@ -16,6 +16,56 @@ interface InteractiveLetterProps {
 
 type Stage = 'intro' | 'selection' | 'revealed';
 
+const moodOptions = [
+  {
+    id: 'relieved',
+    label: 'Lega banget',
+    response: 'Wajar banget. Setelah sejauh ini, napas lega itu pantas kamu punya.',
+  },
+  {
+    id: 'revision',
+    label: 'Masih kepikiran revisi',
+    response: 'Revisi itu boss terakhir, bukan tanda kamu gagal. Kamu sudah sampai sejauh ini.',
+  },
+  {
+    id: 'sleepy',
+    label: 'Mau tidur 3 hari',
+    response: 'Tidur dulu juga prestasi. Badan kamu juga ikut sidang kemarin.',
+  },
+  {
+    id: 'strong',
+    label: 'Pura-pura kuat',
+    response: 'Tidak apa-apa. Kadang kuat itu memang pelan-pelan, bukan selalu lantang.',
+  },
+];
+
+const funOptions = [
+  {
+    id: 'flower',
+    icon: '🌹',
+    label: 'Bunga Mawar',
+    hint: 'Tanda cinta dan kebanggaan',
+  },
+  {
+    id: 'star',
+    icon: '⭐',
+    label: 'Bintang',
+    hint: 'Kamu bersinar terang',
+  },
+  {
+    id: 'party',
+    icon: '🎉',
+    label: 'Perayaan',
+    hint: 'Mari rayakan usahamu',
+  },
+  {
+    id: 'gift',
+    icon: '🎁',
+    label: 'Hadiah Spesial',
+    hint: 'Kejutan kecil untukmu',
+  },
+];
+
 export function InteractiveLetter({
   recipientName,
   message,
@@ -26,42 +76,14 @@ export function InteractiveLetter({
   onThankYou,
 }: InteractiveLetterProps) {
   const [stage, setStage] = useState<Stage>('intro');
+  const [selectedMood, setSelectedMood] = useState(moodOptions[0]);
   const [selectedOption, setSelectedOption] = useState<string | null>(null);
-  const [hasReadLetter, setHasReadLetter] = useState(false);
-
-  const funOptions = [
-    {
-      id: 'flower',
-      icon: '🌹',
-      label: 'Bunga Mawar',
-      hint: 'Tanda cinta dan kebanggaan',
-    },
-    {
-      id: 'star',
-      icon: '⭐',
-      label: 'Bintang',
-      hint: 'Kamu bersinar terang!',
-    },
-    {
-      id: 'party',
-      icon: '🎉',
-      label: 'Perayaan',
-      hint: 'Mari rayakan kesuksesan!',
-    },
-    {
-      id: 'gift',
-      icon: '🎁',
-      label: 'Hadiah Spesial',
-      hint: 'Kejutan untukmu!',
-    },
-  ];
 
   const handleSelectOption = (id: string) => {
     setSelectedOption(id);
-    setTimeout(() => {
+    window.setTimeout(() => {
       setStage('revealed');
-      setHasReadLetter(true);
-    }, 600);
+    }, 500);
   };
 
   const handleBackToSelection = () => {
@@ -79,7 +101,6 @@ export function InteractiveLetter({
           exit={{ opacity: 0 }}
           className="min-h-screen bg-gradient-to-br from-pink-50 via-rose-50 to-red-50 flex flex-col items-center justify-center p-4 relative overflow-hidden"
         >
-          {/* Floating petals */}
           <div className="absolute inset-0 overflow-hidden pointer-events-none">
             {[...Array(6)].map((_, i) => (
               <motion.div
@@ -119,49 +140,58 @@ export function InteractiveLetter({
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
               transition={{ duration: 0.8, delay: 0.2 }}
-              className="mb-8"
+              className="mb-6"
             >
               <p className="text-xl sm:text-2xl font-semibold text-foreground mb-2">
                 🎓 Selamat sudah menyelesaikan sidang skripsi!
               </p>
               <p className="text-base sm:text-lg text-foreground">
-                Ada pesan spesial dari orang-orang terkasih...
+                Sebelum suratnya dibuka, pilih mood kamu dulu.
               </p>
             </motion.div>
 
             <motion.div
-              initial={{ opacity: 0, scale: 0.8 }}
+              initial={{ opacity: 0, scale: 0.95 }}
               animate={{ opacity: 1, scale: 1 }}
-              transition={{ duration: 0.8, delay: 0.4 }}
-              className="mb-12 p-6 sm:p-8 bg-white rounded-2xl shadow-lg border-2 border-accent"
+              transition={{ duration: 0.6, delay: 0.3 }}
+              className="mb-8 rounded-2xl border-2 border-accent bg-white p-4 sm:p-6 shadow-lg"
             >
-              <p className="text-foreground leading-relaxed mb-4">
-                Perjalananmu penuh dengan perjuangan yang mungkin tidak semua orang tahu. Dari revisi, rasa lelah, sampai hari-hari yang tidak mudah, kamu tetap bertahan dan terus melangkah.
-
-Hari ini kamu berhasil sampai di titik yang kamu perjuangkan. Aku benar-benar bangga melihat kamu.
-              </p>
-              <p className="text-foreground font-semibold italic">
-                Pilih satu kejutan kecil di bawah, ada pesan khusus untukmu 💌
-              </p>
+              <div className="grid grid-cols-2 gap-3">
+                {moodOptions.map((mood) => (
+                  <button
+                    key={mood.id}
+                    type="button"
+                    onClick={() => setSelectedMood(mood)}
+                    className={`rounded-xl border-2 px-3 py-3 text-sm font-semibold transition sm:text-base ${
+                      selectedMood.id === mood.id
+                        ? 'border-primary bg-primary text-white shadow-md'
+                        : 'border-accent bg-background text-foreground hover:border-primary'
+                    }`}
+                  >
+                    {mood.label}
+                  </button>
+                ))}
+              </div>
+              <motion.p
+                key={selectedMood.id}
+                initial={{ opacity: 0, y: 8 }}
+                animate={{ opacity: 1, y: 0 }}
+                className="mt-4 rounded-xl bg-rose-50 px-4 py-3 text-sm font-medium leading-relaxed text-foreground sm:text-base"
+              >
+                {selectedMood.response}
+              </motion.p>
             </motion.div>
 
-            <motion.div
+            <motion.button
               initial={{ opacity: 0, y: 30 }}
               animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.8, delay: 0.6 }}
-              className="mb-8"
+              transition={{ duration: 0.8, delay: 0.5 }}
+              onClick={() => setStage('selection')}
+              className="inline-flex items-center gap-2 bg-primary hover:bg-primary-dark text-white font-semibold py-3 px-8 rounded-full transition-all hover:shadow-lg"
             >
-              <p className="text-sm text-secondary-foreground mb-4 font-semibold">
-                Pilih simbol yang mewakili perasaanmu:
-              </p>
-              <button
-                onClick={() => setStage('selection')}
-                className="inline-flex items-center gap-2 bg-primary hover:bg-primary-dark text-white font-semibold py-3 px-8 rounded-full transition-all hover:shadow-lg"
-              >
-                <Sparkles className="w-5 h-5" />
-                Lanjut →
-              </button>
-            </motion.div>
+              <Sparkles className="w-5 h-5" />
+              Lanjut →
+            </motion.button>
           </div>
         </motion.div>
       )}
@@ -174,7 +204,6 @@ Hari ini kamu berhasil sampai di titik yang kamu perjuangkan. Aku benar-benar ba
           exit={{ opacity: 0 }}
           className="min-h-screen bg-gradient-to-br from-pink-50 via-rose-50 to-red-50 flex flex-col items-center justify-center p-4 relative overflow-hidden"
         >
-          {/* Floating petals */}
           <div className="absolute inset-0 overflow-hidden pointer-events-none">
             {[...Array(6)].map((_, i) => (
               <motion.div
@@ -206,18 +235,18 @@ Hari ini kamu berhasil sampai di titik yang kamu perjuangkan. Aku benar-benar ba
               animate={{ opacity: 1, y: 0 }}
               className="text-3xl sm:text-4xl font-bold text-center text-foreground mb-2"
             >
-              Pilih Simbolmu 🎨
+              Pilih simbolmu 🎨
             </motion.h2>
             <motion.p
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
               transition={{ delay: 0.2 }}
-              className="text-center text-foreground mb-12"
+              className="text-center text-foreground mb-10"
             >
-              Setiap pilihan membawa makna istimewa untukmu
+              Setiap pilihan membawa makna istimewa untukmu.
             </motion.p>
 
-            <div className="grid grid-cols-2 sm:grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-6 mb-8">
+            <div className="grid grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-6 mb-8">
               {funOptions.map((option, index) => (
                 <motion.button
                   key={option.id}
@@ -225,7 +254,7 @@ Hari ini kamu berhasil sampai di titik yang kamu perjuangkan. Aku benar-benar ba
                   animate={{ opacity: 1, scale: 1 }}
                   transition={{ delay: index * 0.1 }}
                   onClick={() => handleSelectOption(option.id)}
-                  className={`group relative p-6 rounded-2xl transition-all duration-300 ${
+                  className={`group relative p-4 sm:p-6 rounded-2xl transition-all duration-300 ${
                     selectedOption === option.id
                       ? 'bg-primary scale-105 shadow-2xl'
                       : 'bg-white border-2 border-accent hover:border-primary hover:scale-105'
@@ -258,51 +287,18 @@ Hari ini kamu berhasil sampai di titik yang kamu perjuangkan. Aku benar-benar ba
                   >
                     {option.hint}
                   </p>
-
-                  {selectedOption !== option.id && (
-                    <motion.div
-                      className="absolute inset-0 rounded-2xl bg-gradient-to-r from-primary/0 to-primary/0 opacity-0 group-hover:opacity-10"
-                      animate={{ scale: [1, 1.1, 1] }}
-                      transition={{ repeat: Infinity, duration: 2 }}
-                    />
-                  )}
                 </motion.button>
               ))}
             </div>
 
             {selectedOption && (
-              <motion.div
+              <motion.p
                 initial={{ opacity: 0 }}
                 animate={{ opacity: 1 }}
-                className="text-center"
+                className="text-center text-foreground"
               >
-                <p className="text-foreground mb-4">
-                  Pilihan bagus! Membuka suratmu...
-                </p>
-              </motion.div>
-            )}
-
-            {hasReadLetter && (
-              <motion.div
-                initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ delay: 0.3 }}
-                className="flex justify-center gap-4 mt-8"
-              >
-                <button
-                  onClick={handleBackToSelection}
-                  className="inline-flex items-center gap-2 bg-secondary hover:bg-accent text-foreground font-semibold py-3 px-6 rounded-full transition-all hover:shadow-lg"
-                >
-                  ← Simbol Lain
-                </button>
-                <button
-                  onClick={onThankYou}
-                  className="inline-flex items-center gap-2 bg-primary hover:bg-primary-dark text-white font-semibold py-3 px-8 rounded-full transition-all hover:shadow-lg"
-                >
-                  <Heart className="w-5 h-5" />
-                  Terima Kasih ❤️
-                </button>
-              </motion.div>
+                Pilihan bagus! Membuka suratmu...
+              </motion.p>
             )}
           </div>
         </motion.div>
@@ -317,7 +313,6 @@ Hari ini kamu berhasil sampai di titik yang kamu perjuangkan. Aku benar-benar ba
           className="min-h-screen bg-gradient-to-br from-rose-50 via-pink-50 to-red-50 p-4 sm:p-6"
         >
           <div className="max-w-3xl mx-auto">
-            {/* Back button */}
             <motion.button
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
@@ -325,16 +320,16 @@ Hari ini kamu berhasil sampai di titik yang kamu perjuangkan. Aku benar-benar ba
               onClick={handleBackToSelection}
               className="mb-4 flex items-center gap-2 text-primary hover:text-primary-dark font-semibold transition-colors"
             >
-              ← Pilih simbol lain
+              <ArrowLeft className="h-4 w-4" />
+              Pilih simbol lain
             </motion.button>
-            {/* Letter Content */}
+
             <motion.div
               initial={{ opacity: 0, scale: 0.95 }}
               animate={{ opacity: 1, scale: 1 }}
               transition={{ duration: 0.6 }}
               className="bg-white rounded-3xl shadow-2xl overflow-hidden border-2 border-accent"
             >
-              {/* Letter header */}
               <div className="bg-gradient-to-r from-primary to-primary-dark p-6 sm:p-10 text-white">
                 <motion.div
                   animate={{ rotate: [0, -5, 5, 0] }}
@@ -347,13 +342,11 @@ Hari ini kamu berhasil sampai di titik yang kamu perjuangkan. Aku benar-benar ba
                   {recipientName}
                 </h2>
                 <p className="text-white text-base sm:text-lg font-semibold">
-                  Seorang lulusan yang membanggakan bunda, ayah, dan semua yang mencintaimu.
+                  Seorang lulusan yang membanggakan semua yang mencintaimu.
                 </p>
               </div>
 
-              {/* Letter body */}
               <div className="p-6 sm:p-10">
-                {/* Title */}
                 <motion.div
                   initial={{ opacity: 0 }}
                   animate={{ opacity: 1 }}
@@ -368,30 +361,28 @@ Hari ini kamu berhasil sampai di titik yang kamu perjuangkan. Aku benar-benar ba
                   </p>
                 </motion.div>
 
-                {/* Message content */}
                 <motion.div
                   initial={{ opacity: 0 }}
                   animate={{ opacity: 1 }}
                   transition={{ delay: 0.3 }}
                   className="mb-8"
                 >
-                  <div className="bg-rose-50 rounded-2xl p-6 border-l-4 border-primary">
-                    <p className="text-foreground leading-relaxed text-lg">
+                  <div className="bg-rose-50 rounded-2xl p-5 sm:p-6 border-l-4 border-primary">
+                    <p className="text-foreground leading-relaxed text-base sm:text-lg whitespace-pre-wrap">
                       {message}
                     </p>
                   </div>
                 </motion.div>
 
-                {/* University info */}
                 <motion.div
                   initial={{ opacity: 0 }}
                   animate={{ opacity: 1 }}
                   transition={{ delay: 0.4 }}
-                  className="grid grid-cols-2 gap-4 mb-8"
+                  className="grid grid-cols-1 sm:grid-cols-2 gap-4 mb-8"
                 >
                   <div className="bg-accent-light rounded-xl p-4 text-center">
                     <p className="text-xs text-primary mb-1 font-bold uppercase tracking-wide">
-                      UNIVERSITAS
+                      Perjalanan
                     </p>
                     <p className="font-bold text-primary text-sm">
                       {university}
@@ -399,7 +390,7 @@ Hari ini kamu berhasil sampai di titik yang kamu perjuangkan. Aku benar-benar ba
                   </div>
                   <div className="bg-accent-light rounded-xl p-4 text-center">
                     <p className="text-xs text-primary mb-1 font-bold uppercase tracking-wide">
-                      JURUSAN
+                      Pencapaian
                     </p>
                     <p className="font-bold text-primary text-sm">
                       {major}
@@ -407,7 +398,6 @@ Hari ini kamu berhasil sampai di titik yang kamu perjuangkan. Aku benar-benar ba
                   </div>
                 </motion.div>
 
-                {/* Photo if available */}
                 {imageUrl && (
                   <motion.div
                     initial={{ opacity: 0 }}
@@ -417,13 +407,12 @@ Hari ini kamu berhasil sampai di titik yang kamu perjuangkan. Aku benar-benar ba
                   >
                     <img
                       src={imageUrl}
-                      alt="Special moment"
+                      alt="Momen spesial"
                       className="w-full h-auto object-cover max-h-96"
                     />
                   </motion.div>
                 )}
 
-                {/* Signature */}
                 <motion.div
                   initial={{ opacity: 0 }}
                   animate={{ opacity: 1 }}
@@ -438,7 +427,20 @@ Hari ini kamu berhasil sampai di titik yang kamu perjuangkan. Aku benar-benar ba
                   </p>
                 </motion.div>
 
-
+                <motion.div
+                  initial={{ opacity: 0, y: 12 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ delay: 0.7 }}
+                  className="text-center"
+                >
+                  <button
+                    onClick={onThankYou}
+                    className="inline-flex w-full items-center justify-center gap-2 rounded-xl bg-primary px-6 py-3 font-semibold text-white shadow-lg transition hover:bg-primary-dark sm:w-auto"
+                  >
+                    <Heart className="h-5 w-5" />
+                    Lanjut ke pesan terakhir
+                  </button>
+                </motion.div>
               </div>
             </motion.div>
           </div>

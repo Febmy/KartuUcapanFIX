@@ -18,8 +18,8 @@ export function ReadyConfirmation({
 
   const moveNotReadyButton = () => {
     setNotReadyPosition({
-      x: Math.random() * 200 - 100,
-      y: Math.random() * 200 - 100,
+      x: Math.random() * 160 - 80,
+      y: Math.random() * 120 - 60,
     });
   };
 
@@ -40,7 +40,6 @@ export function ReadyConfirmation({
       exit={{ opacity: 0 }}
       className="min-h-screen bg-gradient-to-br from-background via-accent-light to-background flex items-center justify-center px-4 py-8"
     >
-      {/* Decorative petals */}
       <div className="absolute inset-0 overflow-hidden pointer-events-none">
         {[...Array(8)].map((_, i) => (
           <motion.div
@@ -74,7 +73,6 @@ export function ReadyConfirmation({
         className="max-w-lg w-full relative z-10"
       >
         <div className="bg-white rounded-2xl shadow-2xl p-8 sm:p-12 border-2 border-primary border-opacity-20">
-          {/* Main heading */}
           <motion.h2
             initial={{ opacity: 0, y: -20 }}
             animate={{ opacity: 1, y: 0 }}
@@ -84,7 +82,6 @@ export function ReadyConfirmation({
             Hai, {recipientName}!
           </motion.h2>
 
-          {/* Message */}
           <motion.p
             initial={{ opacity: 0, y: -10 }}
             animate={{ opacity: 1, y: 0 }}
@@ -94,7 +91,6 @@ export function ReadyConfirmation({
             {readyMessage}
           </motion.p>
 
-          {/* Decorative emoji */}
           <motion.div
             animate={{ scale: [1, 1.2, 1] }}
             transition={{ duration: 2, repeat: Infinity }}
@@ -103,9 +99,7 @@ export function ReadyConfirmation({
             <span className="text-6xl">💌</span>
           </motion.div>
 
-          {/* Button section */}
           <div className="flex flex-col sm:flex-row gap-4 relative min-h-12">
-            {/* Sudah button */}
             <motion.button
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
@@ -117,7 +111,6 @@ export function ReadyConfirmation({
               Sudah Siap!
             </motion.button>
 
-            {/* Belum button (moving) */}
             <motion.button
               animate={notReadyClicks > 0 ? notReadyPosition : { x: 0, y: 0 }}
               onMouseEnter={moveNotReadyButton}
@@ -128,7 +121,6 @@ export function ReadyConfirmation({
             </motion.button>
           </div>
 
-          {/* Motivational text */}
           <motion.p
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
